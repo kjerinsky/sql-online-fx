@@ -9,11 +9,23 @@ version '0.1'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // TornadoFX
     implementation 'no.tornado:tornadofx:1.7.20'
+
+    // SQL
+    implementation "com.vladsch.kotlin-jdbc:kotlin-jdbc:0.5.0"
+    implementation "com.zaxxer:HikariCP:3.4.2"
+    implementation 'mysql:mysql-connector-java:8.0.19'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
 }
 
 idea {
