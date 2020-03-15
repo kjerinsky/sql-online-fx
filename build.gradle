@@ -17,6 +17,7 @@ dependencies {
 
     // TornadoFX
     implementation 'no.tornado:tornadofx:1.7.20'
+    implementation 'de.jensd:fontawesomefx:8.9'
 
     // SQL
     implementation "com.vladsch.kotlin-jdbc:kotlin-jdbc:0.5.0"

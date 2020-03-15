@@ -1,17 +1,19 @@
 package com.goyobo.sqlonline.ui.views
 
-import com.goyobo.sqlonline.db.DbUtil
-import com.goyobo.sqlonline.ui.MainStyles
-import tornadofx.*
+import tornadofx.View
+import tornadofx.addClass
+import tornadofx.plusAssign
+import tornadofx.vbox
 
 class IntoView : View() {
-    override val root = vbox {
-        addClass(MainStyles.view)
-        label("Intro")
-        button("Connect") {
-            action {
-                DbUtil.instance.test()
-            }
+    private val connectionFrom : ConnectionForm by inject()
+
+    override val root = vbox()
+
+    init {
+        with(root) {
+            addClass(com.goyobo.sqlonline.ui.MainStyles.view)
+            root += connectionFrom
         }
     }
 }
