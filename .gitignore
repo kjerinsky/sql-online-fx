@@ -8,3 +8,6 @@ build/
 
 # Java class files
 *.class
+
+# Proprietary save file exentsion
+*.scfg

@@ -1,6 +1,6 @@
-package com.goyobo.sqlonline.ui
+package com.goyobo.sqlonline.ui.views.main
 
-import com.goyobo.sqlonline.ui.views.IntoView
+import com.goyobo.sqlonline.ui.MainStyles
 import com.goyobo.sqlonline.ui.views.Part1
 import tornadofx.*
 
@@ -11,7 +11,7 @@ class Navigation : View() {
         button("Intro") {
             addClass(MainStyles.navigationButton)
             action {
-                fire(NavigationChangeEvent(IntoView()))
+                fire(NavigationChangeEvent(MainContent()))
             }
         }
         button("Part 1") {

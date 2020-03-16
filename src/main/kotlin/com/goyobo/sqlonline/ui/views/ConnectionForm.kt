@@ -1,9 +1,9 @@
 package com.goyobo.sqlonline.ui.views
 
-import com.goyobo.sqlonline.db.DbUtil
-import com.goyobo.sqlonline.ui.models.ConnectionConfig
+import com.goyobo.sqlonline.ui.models.SqlForm
+import com.goyobo.sqlonline.utils.FileManager
+import com.goyobo.sqlonline.utils.fontIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.collections.FXCollections
 import javafx.geometry.Pos
 import javafx.scene.layout.Priority
@@ -12,11 +12,14 @@ import tornadofx.*
 class ConnectionForm : View() {
     override val root = Form()
 
-    val connectionConfig = ConnectionConfig()
+    private val sqlForm = SqlForm()
 
     init {
         with(root) {
-            fieldset("Database Connection", FontAwesomeIconView(FontAwesomeIcon.DATABASE)) {
+            fieldset(
+                "Database Connection",
+                fontIcon(FontAwesomeIcon.DATABASE)
+            ) {
                 field("Database") {
                     combobox<String> {
                         items = FXCollections.observableArrayList("MySQL")
@@ -30,29 +33,30 @@ class ConnectionForm : View() {
                         hgrow = Priority.ALWAYS
                         textfield() {
                             hgrow = Priority.ALWAYS
-                            bind(connectionConfig.hostnameProperty)
+                            bind(sqlForm.hostnameProperty)
                         }
                     }
                     field("Port") {
                         alignment = Pos.CENTER_RIGHT
                         textfield() {
                             maxWidth = 60.0
-                            bind(connectionConfig.portProperty)
+                            bind(sqlForm.portProperty)
                         }
                     }
                 }
                 field("username") {
-                    textfield().bind(connectionConfig.usernameProperty)
+                    textfield().bind(sqlForm.usernameProperty)
                 }
                 field("password") {
-                    passwordfield().bind(connectionConfig.passwordProperty)
+                    passwordfield().bind(sqlForm.passwordProperty)
                 }
                 button("Connect") {
                     vboxConstraints {
                         margin = insets(70, 5)
                     }
                     action {
-                        DbUtil.instance.test()
+//                        DbUtil.instance.test()
+                        sqlForm.fromDTO(FileManager.loadFile())
                     }
                 }
             }

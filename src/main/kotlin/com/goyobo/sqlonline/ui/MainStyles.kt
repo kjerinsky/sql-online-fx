@@ -6,8 +6,9 @@ import tornadofx.*
 class MainStyles : Stylesheet() {
     companion object {
         val navigation by cssclass()
-        val view by cssclass()
         val navigationButton by cssclass()
+        val view by cssclass()
+        val toolbarButtons by cssclass()
     }
 
     init {
@@ -27,6 +28,18 @@ class MainStyles : Stylesheet() {
             fontWeight = FontWeight.BOLD
             textFill = c("#ddd")
             fontSize = 16.px
+        }
+
+        toolbarButtons {
+            contains(button) {
+                backgroundColor += c(0.0,0.0,0.0,0.0)
+                and(hover) {
+                    backgroundColor += c("#ccc")
+                }
+                and(pressed) {
+                    backgroundColor += c("#aaa")
+                }
+            }
         }
     }
 }

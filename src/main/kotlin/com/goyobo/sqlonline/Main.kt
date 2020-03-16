@@ -1,7 +1,7 @@
 package com.goyobo.sqlonline
 
 import com.goyobo.sqlonline.ui.MainStyles
-import com.goyobo.sqlonline.ui.MainView
+import com.goyobo.sqlonline.ui.views.main.MainLayout
 import tornadofx.App
 
-class Main: App(MainView::class, MainStyles::class)
+class Main: App(MainLayout::class, MainStyles::class)
