@@ -1,8 +1,9 @@
 package com.goyobo.sqlonline.ui.views.main
 
-import com.goyobo.sqlonline.utils.fontIcon
 import com.goyobo.sqlonline.ui.MainStyles
+import com.goyobo.sqlonline.utils.fontIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
 import javafx.scene.control.Tooltip
 import tornadofx.View
 import tornadofx.addClass
@@ -16,11 +17,11 @@ class MainToolbar : View() {
         with(root) {
             addClass(MainStyles.toolbarButtons)
             button {
-                graphic = fontIcon(FontAwesomeIcon.FOLDER_OPEN_ALT)
+                graphic = fontIcon(FontAwesomeIcon.FOLDER_OPEN)
                 tooltip = Tooltip("Open")
             }
             button {
-                graphic = fontIcon(FontAwesomeIcon.SAVE)
+                graphic = fontIcon(MaterialDesignIcon.CONTENT_SAVE)
                 tooltip = Tooltip("Save")
             }
         }

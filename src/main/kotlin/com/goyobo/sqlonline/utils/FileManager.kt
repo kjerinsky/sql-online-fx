@@ -1,7 +1,7 @@
 package com.goyobo.sqlonline.utils
 
-import com.goyobo.sqlonline.ui.models.SqlForm
 import com.goyobo.sqlonline.ui.models.MainFormDto
+import com.goyobo.sqlonline.ui.models.SqlForm
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import java.io.File
@@ -15,7 +15,9 @@ object FileManager {
     }
 
     fun loadFile(): MainFormDto {
-        val compressedFile = File("test.scfg").inputStream().readBytes()
+        val stream = File("test.scfg").inputStream()
+        val compressedFile = stream.readBytes()
+        stream.close()
         val jsonData = ungzip(compressedFile)
         return json.parse(MainFormDto.serializer(), jsonData)
     }
