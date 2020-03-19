@@ -1,7 +1,7 @@
 package com.goyobo.sqlonline.ui.views
 
+import com.goyobo.sqlonline.db.Database
 import com.goyobo.sqlonline.ui.models.SqlForm
-import com.goyobo.sqlonline.utils.FileManager
 import com.goyobo.sqlonline.utils.fontIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import javafx.collections.FXCollections
@@ -12,7 +12,7 @@ import tornadofx.*
 class ConnectionForm : View() {
     override val root = Form()
 
-    private val sqlForm = SqlForm()
+    private val sqlForm = SqlForm.instance
 
     init {
         with(root) {
@@ -33,30 +33,38 @@ class ConnectionForm : View() {
                         hgrow = Priority.ALWAYS
                         textfield() {
                             hgrow = Priority.ALWAYS
-                            bind(sqlForm.hostnameProperty)
+                            bind(sqlForm.hostname)
                         }
                     }
                     field("Port") {
                         alignment = Pos.CENTER_RIGHT
                         textfield() {
                             maxWidth = 60.0
-                            bind(sqlForm.portProperty)
+                            bind(sqlForm.port)
                         }
                     }
                 }
-                field("username") {
-                    textfield().bind(sqlForm.usernameProperty)
+                field("Schema") {
+                    textfield().bind(sqlForm.schema)
                 }
-                field("password") {
-                    passwordfield().bind(sqlForm.passwordProperty)
+                field("Username") {
+                    textfield().bind(sqlForm.username)
+                }
+                field("Password") {
+                    passwordfield().bind(sqlForm.password)
                 }
                 button("Connect") {
                     vboxConstraints {
                         margin = insets(70, 5)
                     }
                     action {
-//                        DbUtil.instance.test()
-                        sqlForm.fromDTO(FileManager.loadFile())
+                        Database.connect(
+                            sqlForm.hostname.value,
+                            sqlForm.port.value,
+                            sqlForm.username.value,
+                            sqlForm.password.value
+                        )
+                        Database.test()
                     }
                 }
             }

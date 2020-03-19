@@ -5,19 +5,19 @@ import com.vladsch.kotlin.jdbc.SessionImpl
 import com.vladsch.kotlin.jdbc.sqlQuery
 import com.vladsch.kotlin.jdbc.usingDefault
 
-class DbUtil private constructor() {
+// TODO pre-check users schema privileges if possible
+// TODO allow disconnect and reconnect to different databases
+object Database {
 
-    private object HOLDER {
-        val INSTANCE = DbUtil()
+    fun connect(hostname: String, port: String, username: String, password: String) {
+        if (!connected()) {
+            HikariCP.default("jdbc:mysql://$hostname:$port/sql_online", username, password)
+            SessionImpl.defaultDataSource = { HikariCP.dataSource() }
+        }
     }
 
-    init {
-        HikariCP.default("jdbc:mysql://localhost:3306/sql_online", "user", "root")
-        SessionImpl.defaultDataSource = { HikariCP.dataSource() }
-    }
-
-    companion object {
-        val instance: DbUtil by lazy { HOLDER.INSTANCE }
+    private fun connected(): Boolean {
+        return SessionImpl.defaultDataSource != null
     }
 
     fun test() {
